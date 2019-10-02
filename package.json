@@ -5,5 +5,12 @@
   "main": "index.js",
   "author": "Eliott Mahou <eliott.mahou@polymtl.ca>",
   "license": "UNLICENSED",
-  "private": true
+  "private": true,
+  "scripts": {
+    "start": "node src/app.js"
+  },
+  "dependencies": {
+    "apollo-server": "^2.9.4",
+    "graphql": "^14.5.8"
+  }
 }
