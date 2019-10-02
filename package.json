@@ -1,0 +1,9 @@
+{
+  "name": "coding-test",
+  "version": "1.0.0",
+  "description": "coding test in 2 parts",
+  "main": "index.js",
+  "author": "Eliott Mahou <eliott.mahou@polymtl.ca>",
+  "license": "UNLICENSED",
+  "private": true
+}
