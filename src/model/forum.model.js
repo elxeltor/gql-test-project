@@ -1,5 +1,5 @@
 import {FORUM_DB_STRING} from '../config';
-import {StorageError} from '../utils/error';
+import {StorageError, InternalError} from '../utils/error';
 import * as database from './storage';
 
 export async function create(data) {
@@ -7,7 +7,8 @@ export async function create(data) {
 	const forum = {
 		...data,
 		id: forumId,
-		messages: []
+		messages: [],
+		participants: []
 	};
 	const forums = await database.get(FORUM_DB_STRING)
 		.then(resp => resp || {});
@@ -30,6 +31,19 @@ export async function get(forumId) {
 		});
 }
 
+export async function getAll() {
+	return database.get(FORUM_DB_STRING)
+		.then(forums => {
+			if (forums) {
+				return forums;
+			}
+
+			throw new InternalError({
+				message: 'Forums table does not exist'
+			});
+		});
+}
+
 export async function remove(forumId) {
 	return database.get(FORUM_DB_STRING)
 		.then(forums => {
@@ -44,11 +58,26 @@ export async function remove(forumId) {
 		});
 }
 
+export async function addParticipant(userId, forumId) {
+	return database.get(FORUM_DB_STRING)
+		.then(async forums => {
+			if (forums && forums[forumId]) {
+				forums[forumId].participants.push(userId);
+				await database.set(FORUM_DB_STRING, forums);
+				return forums[forumId];
+			}
+
+			throw new StorageError({
+				message: 'Forum does not exist'
+			});
+		});
+}
+
 export async function addMessage(forumId, messageId) {
 	return database.get(FORUM_DB_STRING)
 		.then(forums => {
 			if (forums && forums[forumId]) {
-				forums.forumId.messages.push(messageId);
+				forums[forumId].messages.push(messageId);
 				return database.set(FORUM_DB_STRING, forums);
 			}
 
