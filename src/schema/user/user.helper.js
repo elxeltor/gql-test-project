@@ -17,6 +17,22 @@ export async function deleteUser(userId) {
 	return {id: userId};
 }
 
+export async function seed(users) {
+	if (!Array.isArray(users)) {
+		throw new TypeError('Invalid Users seed, the seed needs to be a list');
+	}
+
+	for (const user of users) {
+		if (isNaN(parseInt(user.id, 10)) || user.id <= 0) {
+			throw new Error('Invalid Users seed, the ID is required and must be greater than zero');
+		}
+
+		validateUserInput(user);
+	}
+
+	UserModel.seed(users);
+}
+
 function formatUserOutput(userData) {
 	return userData;
 }
