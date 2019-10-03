@@ -1,15 +1,15 @@
 import {LocalStorage} from 'node-localstorage';
 const localStorage = new LocalStorage('./storage');
 
-export function get(key) {
+export async function get(key) {
 	return JSON.parse(localStorage.getItem(key));
 }
 
-export function set(key, value) {
+export async function set(key, value) {
 	localStorage.setItem(key, JSON.stringify(value));
 }
 
-export function del(key) {
+export async function del(key) {
 	localStorage.removeItem(key);
 }
 

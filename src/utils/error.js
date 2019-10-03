@@ -11,7 +11,7 @@ export class StorageError extends Error {
 		this.message = args.message || 'Undefined storage error.';
 
 		// @TODO: Use proper Logger in real project
-		console.error(`[StorageError] details: ${args.details}`);
+		console.error(`[StorageError] details: ${args.details || this.message}`);
 	}
 }
 
@@ -24,6 +24,6 @@ export class MutationError extends Error {
 		this.message = args.message || 'Undefined mutation error.';
 
 		// @TODO: Use proper Logger in real project
-		console.error(`[MutationError] details: ${args.details}`);
+		console.error(`[MutationError] details: ${args.details || this.message}`);
 	}
 }

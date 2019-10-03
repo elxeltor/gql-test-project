@@ -1,8 +1,8 @@
 import {MutationError} from '../../utils/error';
 
 export function validateUserInput(input) {
-	nameRequirements(input.name);
-	nameProfanityFilter(input.name);
+	nameRequirements(input.displayName);
+	nameProfanityFilter(input.displayName);
 	ageRequirements(input.age);
 	return input;
 }
@@ -17,7 +17,7 @@ function nameRequirements(name) {
 
 function nameProfanityFilter(name) {
 	const myFilter = /f[aeiou][ck]+/;
-	if (myFilter.test(name.toLowercase())) {
+	if (myFilter.test(name.toLowerCase())) {
 		throw new MutationError({
 			message: 'You cannot use profanities in your username'
 		});

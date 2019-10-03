@@ -10,3 +10,6 @@ yarn-error.log*
 
 # Built files
 build/
+
+# Local storage
+storage/
