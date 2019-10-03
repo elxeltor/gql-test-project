@@ -1,0 +1,79 @@
+type Query {
+
+  # Information of the current (logged in) User
+  """
+  Information of the current (logged in) User
+  """
+  me: User!
+
+  # Information of the requested User
+  """
+  Information of the requested User
+  """
+  getUser(id: ID!): User!
+}
+
+type Mutation {
+
+  # Creates a User
+  """
+  Creates a User
+  """
+  createUser(input: CreateUserInput!): User!
+
+  # Deletes a User
+  """
+  Deletes a User
+  """
+  deleteUser(id: ID!): DeleteUserOutput!
+}
+
+type User {
+
+  # User's ID
+  """
+  User's ID
+  """
+  id: ID!
+
+  # User's name
+  """
+  User's name
+  """
+  displayName: String!
+
+  # User's age (optional)
+  """
+  User's age (optional)
+  """
+  age: Int
+}
+
+type DeleteUserOutput {
+
+  # User's ID
+  """
+  User's ID
+  """
+  id: ID!
+}
+
+input CreateUserInput {
+
+  # User's name
+  """
+  User's name
+  """
+  displayName: String!
+
+  # User's age (optional)
+  """
+  User's age (optional)
+  """
+  age: Int
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}
