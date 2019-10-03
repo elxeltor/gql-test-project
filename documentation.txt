@@ -1,75 +1,126 @@
 type Query {
-
+  
+  # Gets a fingle Forum
+  getForum(id: ID!): Forum!
+  
+  # Lists all available Forums
+  listForums: [Forum!]!
+  
+  # Lists all messages of a forum
+  listForumMessages(forumId: ID!): [Message!]!
+  
+  # Gets a single message
+  getMessage(id: ID!): Message!
+  
   # Information of the current (logged in) User
-  """
-  Information of the current (logged in) User
-  """
   me: User!
-
+  
   # Information of the requested User
-  """
-  Information of the requested User
-  """
   getUser(id: ID!): User!
 }
 
 type Mutation {
-
+  
+  # Creates a Forum
+  createForum(input: CreateForumInput!): Forum!
+  
+  # Allows a user to join a Forum
+  joinForum(id: ID!): Forum!
+  
+  # Deletes a Forum
+  deleteForum(id: ID!): DeleteForumOutput!
+  
+  # Posts a new message to a forum
+  postMessage(forumId: ID!, message: MessageInput!): Message!
+  
+  # Deletes a message
+  deleteMessage(id: ID!): DeleteMessageOutput!
+  
   # Creates a User
-  """
-  Creates a User
-  """
   createUser(input: CreateUserInput!): User!
-
+  
   # Deletes a User
-  """
-  Deletes a User
-  """
   deleteUser(id: ID!): DeleteUserOutput!
 }
 
-type User {
-
-  # User's ID
-  """
-  User's ID
-  """
+type Forum {
+  
+  # Forum's ID
   id: ID!
+  
+  # Forum's title
+  title: String!
+  
+  # Forum's list of Messages (ordered by moste recent)
+  messages: [Message!]!
+}
 
+type DeleteForumOutput {
+  
+  # ID of the deleted Forum
+  id: ID!
+}
+
+input CreateForumInput {
+  
+  # Forum's title
+  title: String!
+}
+
+type Message {
+  
+  # Message's ID
+  id: ID!
+  
+  # Message's date of creation
+  timestamp: String!
+  
+  # Message's author
+  author: User!
+  
+  # Message's body content
+  body: String!
+}
+
+type DeleteMessageOutput {
+  
+  # ID of the deleted Message
+  id: ID!
+}
+
+input MessageInput {
+  
+  # ID of the Message's author
+  author: ID!
+  
+  # Message body
+  body: String!
+}
+
+type User {
+  
+  # User's ID
+  id: ID!
+  
   # User's name
-  """
-  User's name
-  """
   displayName: String!
-
+  
   # User's age (optional)
-  """
-  User's age (optional)
-  """
   age: Int
 }
 
 type DeleteUserOutput {
-
+  
   # User's ID
-  """
-  User's ID
-  """
   id: ID!
 }
 
 input CreateUserInput {
-
+  
   # User's name
-  """
-  User's name
-  """
   displayName: String!
-
+  
   # User's age (optional)
-  """
-  User's age (optional)
-  """
   age: Int
 }
 

@@ -1,25 +1,36 @@
 type Query {
+  # Lists all messages of a forum
   listForumMessages(forumId: ID!): [Message!]!
+  # Gets a single message
   getMessage(id: ID!): Message!
 }
 
 type Mutation {
+  # Posts a new message to a forum
   postMessage(forumId: ID!, message: MessageInput!): Message!
+  # Deletes a message
   deleteMessage(id: ID!): DeleteMessageOutput!
 }
 
 type Message {
+  # Message's ID
 	id: ID!
+  # Message's date of creation
 	timestamp: String!
+  # Message's author
 	author: User!
+  # Message's body content
 	body: String!
 }
 
 type DeleteMessageOutput {
+  # ID of the deleted Message
   id: ID!
 }
 
 input MessageInput {
-	userId: ID!
+  # ID of the Message's author
+	author: ID!
+  # Message body
 	body: String!
 }

@@ -1,24 +1,34 @@
 type Query {
+	# Gets a single Forum
 	getForum(id: ID!): Forum!
+	# Lists all available Forums
 	listForums: [Forum!]!
 }
 
 type Mutation {
+	# Creates a Forum
 	createForum(input: CreateForumInput!): Forum!
+	# Allows a user to join a Forum
 	joinForum(id: ID!): Forum!
+	# Deletes a Forum
 	deleteForum(id: ID!): DeleteForumOutput!
 }
 
 type Forum {
+	# Forum's ID
 	id: ID!
+	# Forum's title
 	title: String!
+	# Forum's list of Messages (ordered by moste recent)
 	messages: [Message!]!
 }
 
 type DeleteForumOutput {
+	# ID of the deleted Forum
 	id: ID!
 }
 
 input CreateForumInput {
+	# Forum's title
 	title: String!
 }
