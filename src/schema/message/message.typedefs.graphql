@@ -7,9 +7,9 @@ type Query {
 
 type Mutation {
   # Posts a new message to a forum
-  postMessage(forumId: ID!, message: MessageInput!): Message!
+  postMessage(userId: ID!, forumId: ID!, message: MessageInput!): Message!
   # Deletes a message
-  deleteMessage(id: ID!): DeleteMessageOutput!
+  deleteMessage(userId: ID!, messageId: ID!): DeleteMessageOutput!
 }
 
 type Message {

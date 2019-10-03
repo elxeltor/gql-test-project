@@ -7,11 +7,11 @@ type Query {
 
 type Mutation {
 	# Creates a Forum
-	createForum(input: CreateForumInput!): Forum!
+	createForum(userId: ID!, input: CreateForumInput!): Forum!
 	# Allows a user to join a Forum
-	joinForum(id: ID!): Forum!
+	joinForum(userId: ID!, forumId: ID!): Forum!
 	# Deletes a Forum
-	deleteForum(id: ID!): DeleteForumOutput!
+	deleteForum(userId: ID!, forumId: ID!): DeleteForumOutput!
 }
 
 type Forum {
