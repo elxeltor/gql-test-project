@@ -6,6 +6,10 @@ export async function getUser(userId) {
 		.then(formatUserOutput);
 }
 
+export async function getUsers(userIds) {
+	return UserModel.getMany(userIds);
+}
+
 export async function createUser(input) {
 	validateUserInput(input);
 	return UserModel.create(input)

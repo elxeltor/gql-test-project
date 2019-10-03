@@ -35,6 +35,26 @@ export async function get(userId) {
 		});
 }
 
+export async function getMany(userIds) {
+	return database.get(USER_DB_STRING)
+		.then(users => {
+			const foundUsers = [];
+			for (const userId of userIds) {
+				if (users && users[userId]) {
+					foundUsers.push(users[userId]);
+				}
+			}
+
+			if (userIds.length !== foundUsers.length) {
+				throw new StorageError({
+					message: 'A user in the Forum does not exist'
+				});
+			}
+
+			return foundUsers;
+		});
+}
+
 export async function remove(userId) {
 	return database.get(USER_DB_STRING)
 		.then(users => {

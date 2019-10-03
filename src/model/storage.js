@@ -2,7 +2,12 @@ import {LocalStorage} from 'node-localstorage';
 const localStorage = new LocalStorage('./storage');
 
 export async function get(key) {
-	return JSON.parse(localStorage.getItem(key));
+	const data = localStorage.getItem(key);
+	if (data === null || data === undefined) {
+		return null;
+	}
+
+	return JSON.parse(data);
 }
 
 export async function set(key, value) {

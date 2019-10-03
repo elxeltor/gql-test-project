@@ -6,7 +6,10 @@ export async function getForum(forumId) {
 }
 
 export async function getForumsList() {
-	return ForumModel.getAll();
+	return ForumModel.getAll()
+		.then(forums => {
+			return Object.values(forums);
+		});
 }
 
 export async function createForum(input) {
@@ -22,7 +25,8 @@ export async function createForum(input) {
 export async function deleteForum(userId, forumId) {
 	const isOwner = await isForumOwner(userId, forumId);
 	if (isOwner) {
-		return ForumModel.remove(forumId);
+		await ForumModel.remove(forumId);
+		return {id: forumId};
 	}
 
 	throw new MutationError({
@@ -35,7 +39,7 @@ export async function joinForum(userId, forumId) {
 }
 
 function isForumInputValid(input) {
-	return input.body.length > 0;
+	return input.title.length > 0;
 }
 
 async function isForumOwner(userId, forumId) {

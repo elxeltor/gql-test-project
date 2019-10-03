@@ -2,7 +2,7 @@ type Query {
 	# Gets a single Forum
 	getForum(id: ID!): Forum!
 	# Lists all available Forums
-	listForums: [Forum!]!
+	listForums: [Forum]!
 }
 
 type Mutation {
@@ -20,7 +20,9 @@ type Forum {
 	# Forum's title
 	title: String!
 	# Forum's list of Messages (ordered by moste recent)
-	messages: [Message!]!
+	messages: [Message]!
+	# Participants that joined in that forum
+	participants: [User!]!
 }
 
 type DeleteForumOutput {

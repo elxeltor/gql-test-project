@@ -39,16 +39,7 @@ export async function get(forumId) {
 }
 
 export async function getAll() {
-	return database.get(FORUM_DB_STRING)
-		.then(forums => {
-			if (forums) {
-				return forums;
-			}
-
-			throw new InternalError({
-				message: 'Forums table does not exist'
-			});
-		});
+	return database.get(FORUM_DB_STRING);
 }
 
 export async function remove(forumId) {
