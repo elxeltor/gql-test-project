@@ -2,14 +2,20 @@ import {USER_DB_STRING} from '../config';
 import {StorageError} from '../utils/error';
 import * as database from './storage';
 
+export async function init() {
+	const forums = database.get(USER_DB_STRING);
+	if (forums === null) {
+		await database.set(USER_DB_STRING, {});
+	}
+}
+
 export async function create(data) {
 	const userId = database.getUniqueId();
 	const user = {
 		...data,
 		id: userId
 	};
-	const users = await database.get(USER_DB_STRING)
-		.then(resp => resp || {});
+	const users = await database.get(USER_DB_STRING);
 
 	users[userId] = user;
 	await database.set(USER_DB_STRING, users);

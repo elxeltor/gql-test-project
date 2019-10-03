@@ -1,6 +1,13 @@
 import {FORUM_DB_STRING} from '../config';
-import {StorageError, InternalError} from '../utils/error';
+import {StorageError} from '../utils/error';
 import * as database from './storage';
+
+export async function init() {
+	const forums = database.get(FORUM_DB_STRING);
+	if (forums === null) {
+		await database.set(FORUM_DB_STRING, {});
+	}
+}
 
 export async function create(data) {
 	const forumId = database.getUniqueId();
@@ -8,7 +15,7 @@ export async function create(data) {
 		...data,
 		id: forumId,
 		messages: [],
-		participants: []
+		participants: [data.ownerId]
 	};
 	const forums = await database.get(FORUM_DB_STRING)
 		.then(resp => resp || {});
