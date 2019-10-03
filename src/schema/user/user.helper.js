@@ -13,7 +13,7 @@ export async function createUser(input) {
 }
 
 export async function deleteUser(userId) {
-	await UserModel.remove(userId)
+	await UserModel.remove(userId);
 	return {id: userId};
 }
 

@@ -1,6 +1,6 @@
-import * as database from './localStorageLayer';
-import {USER_DB_STRING} from '../config.js';
+import {USER_DB_STRING} from '../config';
 import {StorageError} from '../utils/error';
+import * as database from './storage';
 
 // //////////
 //   PUBLIC
@@ -28,7 +28,7 @@ export async function get(userId) {
 				message: 'Couldn\'t get User.',
 				details: error
 			});
-		})
+		});
 }
 
 export async function remove(userId) {

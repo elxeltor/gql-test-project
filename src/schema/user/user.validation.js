@@ -1,4 +1,4 @@
-
+import {MutationError} from '../../utils/error';
 
 export function validateUserInput(input) {
 	nameRequirements(input.name);
@@ -28,6 +28,6 @@ function ageRequirements(age) {
 	if (!isNaN(parseInt(age, 10)) && age < 18) {
 		throw new MutationError({
 			message: 'You must be an adult to register.'
-		})
+		});
 	}
 }
