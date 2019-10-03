@@ -1,10 +1,10 @@
-import {getUser, createUser, deleteUser} from './user.helper';
+import {getUser, createUser, deleteUser} from './user.helpers';
 
 async function userMeResolver(parent, params, context) {
 	return getUser(context.user.id);
 }
 
-async function getUserResolver(parent, {id}, _) {
+export async function getUserResolver(parent, {id}, _) {
 	return getUser(id);
 }
 

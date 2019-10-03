@@ -1,4 +1,4 @@
-import {seed} from '../src/schema/user/user.helper';
+import {seed} from '../src/schema/user/user.helpers';
 import {users} from './fixtures.json';
 
 export async function seeds() {

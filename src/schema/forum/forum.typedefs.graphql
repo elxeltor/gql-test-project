@@ -1,0 +1,24 @@
+type Query {
+	getForum(id: ID!): Forum!
+	listForums: [Forum!]!
+}
+
+type Mutation {
+	createForum(input: CreateForumInput!): Forum!
+	joinForum(id: ID!): Forum!
+	deleteForum(id: ID!): DeleteForumOutput!
+}
+
+type Forum {
+	id: ID!
+	title: String!
+	messages: [Message!]!
+}
+
+type DeleteForumOutput {
+	id: ID!
+}
+
+input CreateForumInput {
+	title: String!
+}

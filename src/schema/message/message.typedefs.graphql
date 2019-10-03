@@ -1,0 +1,25 @@
+type Query {
+  listForumMessages(forumId: ID!): [Message!]!
+  getMessage(id: ID!): Message!
+}
+
+type Mutation {
+  postMessage(forumId: ID!, message: MessageInput!): Message!
+  deleteMessage(id: ID!): DeleteMessageOutput!
+}
+
+type Message {
+	id: ID!
+	timestamp: String!
+	author: User!
+	body: String!
+}
+
+type DeleteMessageOutput {
+  id: ID!
+}
+
+input MessageInput {
+	userId: ID!
+	body: String!
+}
