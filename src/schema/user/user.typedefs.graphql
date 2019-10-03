@@ -1,0 +1,54 @@
+type Query {
+	"""
+	Information of the current (logged in) User
+	"""
+	me: User!
+	"""
+	Information of the requested User
+	"""
+	getUser(id: ID!): User!
+}
+
+type Mutation {
+	"""
+	Creates a User
+	"""
+	createUser(input: CreateUserInput!): User!
+	"""
+	Deletes a User
+	"""
+	deleteUser(id: ID!): DeleteUserOutput!
+}
+
+type User {
+	"""
+	User's ID
+	"""
+	id: ID!
+	"""
+	User's name
+	"""
+	displayName: String!
+	"""
+	User's age (optional)
+	"""
+	age: Int
+}
+
+type DeleteUserOutput {
+	"""
+	User's ID
+	"""
+	id: ID!
+}
+
+input CreateUserInput {
+	"""
+	User's name
+	"""
+	displayName: String!
+	"""
+	User's age (optional)
+	"""
+	age: Int
+}
