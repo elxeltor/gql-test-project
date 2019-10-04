@@ -7,7 +7,34 @@
     {"displayName":"4EVER","age":21,"id":1570072212473, "forums": [1570132109586]}
   ],
   "forums": [
-    {"title":"This is a test FORUM","ownerId":"1570072212473","id":1570132109586,"messages":[],"participants":["1570072212473","1570072194806"]},
+    {
+      "title":"This is a test FORUM",
+      "ownerId":"1570072212473",
+      "id":1570132109586,
+      "messages":[
+        {
+          "timestamp": "1570211742736",
+          "author": "1570072194806",
+          "body": "do you realize that you're talking alone in this forum? Dude..."
+        },
+        {
+          "timestamp": "1570211852795",
+          "author": "1570072212473",
+          "body": "And you're saying this to... ?"
+        },
+        {
+          "timestamp": "1570211913387",
+          "author": "1570072194806",
+          "body": "That's the point, do you have any sens of humor? ;)"
+        },
+        {
+          "timestamp": "1570211947919",
+          "author": "1570072212473",
+          "body": "Such a Troll :P"
+        }
+      ],
+      "participants":["1570072212473","1570072194806"]
+    },
     {"title":"FAQ","ownerId":"1570072194806","id":1570156963807,"messages":[],"participants":["1570072194806"]}
   ]
 }

@@ -11,16 +11,16 @@ async function listForumMessagesResolver(parent, {id}, context) {
 }
 
 // eslint-disable-next-line no-unused-vars
-async function postMessageResolver(parent, {userId, forumId, input}, context) {
-	if (await isForumParticipant(userId)) {
-		return addForumMessage(userId, forumId, input)
-			.then(forum => {
-				return forum.messages.reverse();
+async function postMessageResolver(parent, {forumId, input}, context) {
+	if (await isForumParticipant(input.author, forumId)) {
+		return addForumMessage(forumId, input)
+			.then(messages => {
+				return messages.reverse();
 			});
 	}
 
 	throw new MutationError({
-		message: 'You must be part of the forum in order to post in it'
+		message: 'A User must be part of the forum in order to post in it'
 	});
 }
 

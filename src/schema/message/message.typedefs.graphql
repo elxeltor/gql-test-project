@@ -5,23 +5,16 @@ type Query {
 
 type Mutation {
 	# Posts a new message to a forum
-	postMessage(userId: ID!, forumId: ID!, message: MessageInput!): Message!
+	postMessage(forumId: ID!, input: MessageInput!): [Message!]!
 }
 
 type Message {
-	# Message's ID
-	id: ID!
-	# Message's date of creation
+	# Message's timestamp of creation
 	timestamp: String!
 	# Message's author
 	author: PublicUser!
 	# Message's body content
 	body: String!
-}
-
-type DeleteMessageOutput {
-	# ID of the deleted Message
-	id: ID!
 }
 
 input MessageInput {

@@ -87,7 +87,12 @@ export async function addParticipant(userId, forumId) {
 		});
 }
 
-export async function addMessage(forumId, message) {
+export async function addMessage(forumId, input) {
+	const message = {
+		...input,
+		timestamp: (new Date()).valueOf(),
+		id: database.getUniqueId()
+	};
 	return database.get(FORUM_DB_STRING)
 		.then(async forums => {
 			if (forums && forums[forumId]) {
