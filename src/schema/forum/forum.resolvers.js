@@ -1,5 +1,5 @@
 import {getUsers, addUserForum} from '../user/user.helpers';
-import {getForum, getForumsList, createForum, deleteForum, joinForum} from './forum.helpers';
+import {getForum, getForumsList, createForum, joinForum} from './forum.helpers';
 
 // eslint-disable-next-line no-unused-vars
 async function getForumResolver(parent, {id}, context) {
@@ -20,11 +20,6 @@ async function createForumResolver(parent, {userId, input}, context) {
 }
 
 // eslint-disable-next-line no-unused-vars
-async function deleteForumResolver(parent, {userId, forumId}, context) {
-	return deleteForum(userId, forumId);
-}
-
-// eslint-disable-next-line no-unused-vars
 async function joinForumResolver(parent, {userId, forumId}, context) {
 	await addUserForum(userId, forumId);
 	return joinForum(userId, forumId);
@@ -42,7 +37,6 @@ export default {
 	},
 	Mutation: {
 		createForum: createForumResolver,
-		deleteForum: deleteForumResolver,
 		joinForum: joinForumResolver
 	},
 	Forum: {

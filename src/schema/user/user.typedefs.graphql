@@ -8,8 +8,6 @@ type Query {
 type Mutation {
 	# Creates a User
 	createUser(input: CreateUserInput!): User!
-	# Deletes a User
-	deleteUser(id: ID!): DeleteUserOutput!
 }
 
 type User {
@@ -30,11 +28,6 @@ type PublicUser {
 	displayName: String!
 	# User's age
 	age: Int!
-}
-
-type DeleteUserOutput {
-	# User's ID
-	id: ID!
 }
 
 input CreateUserInput {
