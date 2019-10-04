@@ -38,6 +38,24 @@ export async function joinForum(userId, forumId) {
 	return ForumModel.addParticipant(userId, forumId);
 }
 
+export async function seed(forums) {
+	if (!Array.isArray(forums)) {
+		throw new TypeError('Invalid Forums seed, the seed needs to be a list');
+	}
+
+	for (const form of forums) {
+		if (isNaN(parseInt(form.id, 10)) || form.id <= 0) {
+			throw new TypeError('Invalid Forums seed, the ID is required and must be greater than zero');
+		}
+
+		if (!isForumInputValid(form)) {
+			throw new TypeError('Invalid seed data');
+		}
+	}
+
+	return ForumModel.seed(forums);
+}
+
 function isForumInputValid(input) {
 	return input.title.length > 0;
 }

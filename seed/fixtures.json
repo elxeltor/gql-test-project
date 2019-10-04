@@ -5,5 +5,9 @@
     {"displayName":"OkName","age":65,"id":1570072122977, "forums": []},
     {"displayName":"R4nd0mDud3","age":26,"id":1570072194806, "forums": [1570156963807, 1570132109586]},
     {"displayName":"4EVER","age":21,"id":1570072212473, "forums": [1570132109586]}
+  ],
+  "forums": [
+    {"title":"This is a test FORUM","ownerId":"1570072212473","id":1570132109586,"messages":[],"participants":["1570072212473","1570072194806"]},
+    {"title":"FAQ","ownerId":"1570072194806","id":1570156963807,"messages":[],"participants":["1570072194806"]}
   ]
 }

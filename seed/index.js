@@ -1,8 +1,12 @@
-import {seed} from '../src/schema/user/user.helpers';
-import {users} from './fixtures.json';
+import {seed as seedUsers} from '../src/schema/user/user.helpers';
+import {seed as seedForums} from '../src/schema/forum/forum.helpers';
+import {users, forums} from './fixtures.json';
 
 export async function seeds() {
-	console.log('Seeding DB');
-	await seed(users);
-	console.log('Users seed Done');
+	console.log('- Seeding DB');
+	await seedUsers(users);
+	console.log('-- Users seed Done');
+	await seedForums(forums);
+	console.log('-- Forums seed Done');
+	console.log('- Seeding DONE!');
 }
