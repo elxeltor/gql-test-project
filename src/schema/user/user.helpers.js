@@ -38,7 +38,7 @@ export async function seed(users) {
 		validateUserInput(user);
 	}
 
-	UserModel.seed(users);
+	return UserModel.seed(users);
 }
 
 function formatUserOutput(userData) {

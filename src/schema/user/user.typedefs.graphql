@@ -23,6 +23,15 @@ type User {
 	forums: [Forum]!
 }
 
+type PublicUser {
+	# User's ID
+	id: ID!
+	# User's name
+	displayName: String!
+	# User's age (optional)
+	age: Int
+}
+
 type DeleteUserOutput {
 	# User's ID
 	id: ID!

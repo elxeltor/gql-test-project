@@ -22,7 +22,7 @@ type Forum {
 	# Forum's list of Messages (ordered by moste recent)
 	messages: [Message]!
 	# Participants that joined in that forum
-	participants: [User!]!
+	participants: [PublicUser!]!
 }
 
 type DeleteForumOutput {
