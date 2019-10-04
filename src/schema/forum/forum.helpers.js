@@ -38,6 +38,15 @@ export async function joinForum(userId, forumId) {
 	return ForumModel.addParticipant(userId, forumId);
 }
 
+export async function addForumMessage(userId, forumId, input) {
+	const message = {
+		...input,
+		timestamp: new Date(),
+		author: userId
+	};
+	return ForumModel.addMessage(forumId, message);
+}
+
 export async function seed(forums) {
 	if (!Array.isArray(forums)) {
 		throw new TypeError('Invalid Forums seed, the seed needs to be a list');
@@ -64,5 +73,12 @@ async function isForumOwner(userId, forumId) {
 	return ForumModel.get(forumId)
 		.then(forum => {
 			return forum.ownerId === userId;
+		});
+}
+
+export async function isForumParticipant(userId, forumId) {
+	return ForumModel.get(forumId)
+		.then(forum => {
+			return forum.participans.includes(userId);
 		});
 }

@@ -17,8 +17,8 @@ type User {
 	id: ID!
 	# User's name
 	displayName: String!
-	# User's age (optional)
-	age: Int
+	# User's age
+	age: Int!
 	# List of forums the user has joined
 	forums: [Forum]!
 }
@@ -28,8 +28,8 @@ type PublicUser {
 	id: ID!
 	# User's name
 	displayName: String!
-	# User's age (optional)
-	age: Int
+	# User's age
+	age: Int!
 }
 
 type DeleteUserOutput {

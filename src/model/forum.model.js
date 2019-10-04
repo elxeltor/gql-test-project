@@ -87,12 +87,13 @@ export async function addParticipant(userId, forumId) {
 		});
 }
 
-export async function addMessage(forumId, messageId) {
+export async function addMessage(forumId, message) {
 	return database.get(FORUM_DB_STRING)
-		.then(forums => {
+		.then(async forums => {
 			if (forums && forums[forumId]) {
-				forums[forumId].messages.push(messageId);
-				return database.set(FORUM_DB_STRING, forums);
+				forums[forumId].messages.push(message);
+				await database.set(FORUM_DB_STRING, forums);
+				return forums[forumId].messages;
 			}
 
 			throw new StorageError({

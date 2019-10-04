@@ -1,57 +1,40 @@
-import {getUserResolver} from '../user/user.resolvers';
+import {getUser} from '../user/user.helpers';
+import {getForum, addForumMessage, isForumParticipant} from '../forum/forum.helpers';
+import {MutationError} from '../../utils/error';
 
 // eslint-disable-next-line no-unused-vars
-async function listForumMessagesResolver(parent, args, context) {
-	return [{
-		id: '',
-		timestamp: '',
-		userId: '',
-		body: ''
-	}];
+async function listForumMessagesResolver(parent, {id}, context) {
+	return getForum(id)
+		.then(forum => {
+			return forum.messages.reverse();
+		});
 }
 
 // eslint-disable-next-line no-unused-vars
-async function getMessageResolver(parent, {id}, context) {
-	return {
-		id,
-		timestamp: '',
-		userId: '',
-		body: ''
-	};
+async function postMessageResolver(parent, {userId, forumId, input}, context) {
+	if (await isForumParticipant(userId)) {
+		return addForumMessage(userId, forumId, input)
+			.then(forum => {
+				return forum.messages.reverse();
+			});
+	}
+
+	throw new MutationError({
+		message: 'You must be part of the forum in order to post in it'
+	});
 }
 
 // eslint-disable-next-line no-unused-vars
-async function postMessageResolver(parent, {input}, context) {
-	return {
-		id: '',
-		timestamp: '',
-		userId: input.author,
-		body: input.body
-	};
-}
-
-// eslint-disable-next-line no-unused-vars
-async function deleteMessageResolver(parent, {id}, context) {
-	return {
-		id,
-		timestamp: '',
-		userId: '',
-		body: ''
-	};
-}
-
 async function messageAuthorResolver(parent, args, context) {
-	return getUserResolver(parent, {id: parent.userId}, context);
+	return getUser(parent.author);
 }
 
 export default {
 	Query: {
-		listForumMessages: listForumMessagesResolver,
-		getMessage: getMessageResolver
+		listForumMessages: listForumMessagesResolver
 	},
 	Mutation: {
-		postMessage: postMessageResolver,
-		deleteMessage: deleteMessageResolver
+		postMessage: postMessageResolver
 	},
 	Message: {
 		author: messageAuthorResolver
