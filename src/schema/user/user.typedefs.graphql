@@ -19,6 +19,8 @@ type User {
 	displayName: String!
 	# User's age (optional)
 	age: Int
+	# List of forums the user has joined
+	forums: [Forum]!
 }
 
 type DeleteUserOutput {

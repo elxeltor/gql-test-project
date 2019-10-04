@@ -38,8 +38,24 @@ export async function get(forumId) {
 		});
 }
 
-export async function getAll() {
-	return database.get(FORUM_DB_STRING);
+/**
+ * Retrives a sub-list (or all) forums
+ * @param {String[]} [forumIds] Sub-list of forums to retrieve
+ */
+export async function getMany(forumIds) {
+	const allForums = await database.get(FORUM_DB_STRING);
+	if (Array.isArray(forumIds)) {
+		return forumIds.reduce((acc, forumId) => {
+			// @Warn: For now, we'll ignore the case where we're passed invalid forum IDs
+			if (allForums[forumId]) {
+				acc[forumId] = allForums[forumId];
+			}
+
+			return acc;
+		}, {});
+	}
+
+	return allForums;
 }
 
 export async function remove(forumId) {

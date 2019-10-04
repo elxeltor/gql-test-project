@@ -5,8 +5,8 @@ export async function getForum(forumId) {
 	return ForumModel.get(forumId);
 }
 
-export async function getForumsList() {
-	return ForumModel.getAll()
+export async function getForumsList(forumIds) {
+	return ForumModel.getMany(forumIds)
 		.then(forums => {
 			return Object.values(forums);
 		});

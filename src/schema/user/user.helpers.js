@@ -21,6 +21,10 @@ export async function deleteUser(userId) {
 	return {id: userId};
 }
 
+export async function addUserForum(userId, forumId) {
+	return UserModel.addJoinedForum(userId, forumId);
+}
+
 export async function seed(users) {
 	if (!Array.isArray(users)) {
 		throw new TypeError('Invalid Users seed, the seed needs to be a list');

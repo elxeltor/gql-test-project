@@ -1,3 +1,4 @@
+import {getForumsList} from '../forum/forum.helpers';
 import {getUser, createUser, deleteUser} from './user.helpers';
 
 async function userMeResolver(parent, params, context) {
@@ -16,6 +17,10 @@ async function deleteUserResolver(parent, {id}, _) {
 	return deleteUser(id);
 }
 
+async function userForumsResolver(parent) {
+	return getForumsList(parent.forums || []);
+}
+
 export default {
 	Query: {
 		me: userMeResolver,
@@ -24,5 +29,8 @@ export default {
 	Mutation: {
 		createUser: createUserResolver,
 		deleteUser: deleteUserResolver
+	},
+	User: {
+		forums: userForumsResolver
 	}
 };
