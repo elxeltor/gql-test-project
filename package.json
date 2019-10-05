@@ -7,8 +7,8 @@
 	"license": "UNLICENSED",
 	"private": true,
 	"scripts": {
-		"start": "NODE_ENV=development yarn build && nodemon src/app.js",
-		"build": "yarn clean && babel src -d build && cpx \"src/**/*.graphql\" build",
+		"start": "NODE_ENV=development npm run build && nodemon src/app.js",
+		"build": "npm run clean && babel src -d build && cpx \"src/**/*.graphql\" build",
 		"clean": "rm -rf build",
 		"doc": "babel-node script/doc.js"
 	},
