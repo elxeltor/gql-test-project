@@ -10,7 +10,8 @@
 		"start": "NODE_ENV=development npm run build && nodemon src/app.js",
 		"build": "npm run clean && babel src -d build && cpx \"src/**/*.graphql\" build",
 		"clean": "rm -rf build",
-		"doc": "babel-node script/doc.js"
+		"doc": "babel-node script/doc.js",
+		"test": "NODE_ENV=test jest test"
 	},
 	"dependencies": {
 		"apollo-server": "^2.9.4",
@@ -26,6 +27,7 @@
 		"babel-plugin-module-resolver": "^3.2.0",
 		"cpx": "^1.5.0",
 		"eslint-plugin-import": "^2.18.2",
+		"jest": "^24.9.0",
 		"nodemon": "^1.19.3",
 		"xo": "^0.25.3"
 	},
@@ -54,5 +56,14 @@
 			"js": "babel-node --inspect -r src/app.js"
 		},
 		"ext": "js, graphql"
+	},
+	"xo": {
+		"env": [
+			"node",
+			"jest"
+		]
+	},
+	"jest": {
+		"testEnvironment": "node"
 	}
 }
