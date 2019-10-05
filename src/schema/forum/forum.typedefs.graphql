@@ -10,8 +10,6 @@ type Mutation {
 	createForum(userId: ID!, input: CreateForumInput!): Forum!
 	# Allows a user to join a Forum
 	joinForum(userId: ID!, forumId: ID!): Forum!
-	# Deletes a Forum
-	deleteForum(userId: ID!, forumId: ID!): DeleteForumOutput!
 }
 
 type Forum {
@@ -23,11 +21,6 @@ type Forum {
 	messages: [Message]!
 	# Participants that joined in that forum
 	participants: [PublicUser!]!
-}
-
-type DeleteForumOutput {
-	# ID of the deleted Forum
-	id: ID!
 }
 
 input CreateForumInput {

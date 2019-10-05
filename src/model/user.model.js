@@ -41,17 +41,11 @@ export async function getMany(userIds) {
 		.then(users => {
 			const foundUsers = [];
 			for (const userId of userIds) {
+				// @Warn: For now, we'll ignore the case where we're passed invalid user IDs
 				if (users && users[userId]) {
 					foundUsers.push(users[userId]);
 				}
 			}
-
-			// @Warn: Since it's only a test, let's skip this kind of ambiguity for now
-			// if (userIds.length !== foundUsers.length) {
-			// 	throw new StorageError({
-			// 		message: 'A user in the Forum does not exist'
-			// 	});
-			// }
 
 			return foundUsers;
 		});

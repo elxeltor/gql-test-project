@@ -1,16 +1,13 @@
 type Query {
   
-  # Gets a fingle Forum
+  # Gets a single Forum
   getForum(id: ID!): Forum!
   
   # Lists all available Forums
-  listForums: [Forum!]!
+  listForums: [Forum]!
   
   # Lists all messages of a forum
-  listForumMessages(forumId: ID!): [Message!]!
-  
-  # Gets a single message
-  getMessage(id: ID!): Message!
+  listForumMessages(id: ID!): [Message!]!
   
   # Information of the current (logged in) User
   me: User!
@@ -22,25 +19,16 @@ type Query {
 type Mutation {
   
   # Creates a Forum
-  createForum(input: CreateForumInput!): Forum!
+  createForum(userId: ID!, input: CreateForumInput!): Forum!
   
   # Allows a user to join a Forum
-  joinForum(id: ID!): Forum!
-  
-  # Deletes a Forum
-  deleteForum(id: ID!): DeleteForumOutput!
+  joinForum(userId: ID!, forumId: ID!): Forum!
   
   # Posts a new message to a forum
-  postMessage(forumId: ID!, message: MessageInput!): Message!
-  
-  # Deletes a message
-  deleteMessage(id: ID!): DeleteMessageOutput!
+  postMessage(forumId: ID!, input: MessageInput!): [Message!]!
   
   # Creates a User
   createUser(input: CreateUserInput!): User!
-  
-  # Deletes a User
-  deleteUser(id: ID!): DeleteUserOutput!
 }
 
 type Forum {
@@ -52,13 +40,10 @@ type Forum {
   title: String!
   
   # Forum's list of Messages (ordered by moste recent)
-  messages: [Message!]!
-}
-
-type DeleteForumOutput {
+  messages: [Message]!
   
-  # ID of the deleted Forum
-  id: ID!
+  # Participants that joined in that forum
+  participants: [PublicUser!]!
 }
 
 input CreateForumInput {
@@ -69,23 +54,14 @@ input CreateForumInput {
 
 type Message {
   
-  # Message's ID
-  id: ID!
-  
-  # Message's date of creation
+  # Message's timestamp of creation
   timestamp: String!
   
   # Message's author
-  author: User!
+  author: PublicUser!
   
   # Message's body content
   body: String!
-}
-
-type DeleteMessageOutput {
-  
-  # ID of the deleted Message
-  id: ID!
 }
 
 input MessageInput {
@@ -105,14 +81,23 @@ type User {
   # User's name
   displayName: String!
   
-  # User's age (optional)
-  age: Int
+  # User's age
+  age: Int!
+  
+  # List of forums the user has joined
+  forums: [Forum]!
 }
 
-type DeleteUserOutput {
+type PublicUser {
   
   # User's ID
   id: ID!
+  
+  # User's name
+  displayName: String!
+  
+  # User's age
+  age: Int!
 }
 
 input CreateUserInput {
