@@ -18,7 +18,7 @@ describe('[User][Integration]', () => {
 			const user = await createUser(input);
 			expect(user).toEqual(expect.objectContaining({
 				...input,
-				id: expect.any(Number),
+				id: expect.any(String),
 				forums: []
 			}));
 		});
@@ -40,7 +40,7 @@ describe('[User][Integration]', () => {
 
 	describe('[getUser]', () => {
 		it('Should find and return a user\'s iformation', async () => {
-			const id = 1570071891533;
+			const id = '1570071891533';
 			const user = await getUser(id);
 			expect(user).toEqual({
 				id,
@@ -52,7 +52,7 @@ describe('[User][Integration]', () => {
 		it('Should throw querying an invalid user', async () => {
 			let user;
 			try {
-				user = await getUser(123);
+				user = await getUser('123');
 			} catch (error) {
 				expect(error).toBeInstanceOf(StorageError);
 			}

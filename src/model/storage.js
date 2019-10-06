@@ -24,5 +24,5 @@ export function reset() {
 
 export function getUniqueId() {
 	// Sufficient for test purposes
-	return (new Date()).getTime();
+	return (new Date()).getTime().toString();
 }

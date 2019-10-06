@@ -89,7 +89,21 @@ function isMessageDataValid(message) {
 }
 
 function isForumInputValid(input) {
-	return input.title.length > 0;
+	// Should also check if the ownerId exists in the User table
+	// That would be traitforwat on an SQL DB using a foreign key reference
+	if (isNaN(parseInt(input.ownerId, 10))) {
+		throw new ValidationError({
+			message: 'Invalid Owner ID'
+		});
+	}
+
+	if (typeof input.title !== 'string' || input.title === '') {
+		throw new ValidationError({
+			message: 'Invalid Forum title'
+		});
+	}
+
+	return true;
 }
 
 async function isForumOwner(userId, forumId) {
