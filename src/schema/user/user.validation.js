@@ -1,4 +1,4 @@
-import {MutationError} from '../../utils/error';
+import {ValidationError} from '../../utils/error';
 
 export function validateUserInput(input) {
 	nameRequirements(input.displayName);
@@ -9,16 +9,16 @@ export function validateUserInput(input) {
 
 function nameRequirements(name) {
 	if (name.length < 3) {
-		throw new MutationError({
+		throw new ValidationError({
 			message: 'Name is too short (3 chanracters minimum).'
 		});
 	}
 }
 
 function nameProfanityFilter(name) {
-	const myFilter = /f[aeiou][ck]+/;
+	const myFilter = /f[aeiou]+[ck]+/;
 	if (myFilter.test(name.toLowerCase())) {
-		throw new MutationError({
+		throw new ValidationError({
 			message: 'You cannot use profanities in your username'
 		});
 	}
@@ -26,7 +26,7 @@ function nameProfanityFilter(name) {
 
 function ageRequirements(age) {
 	if (!isNaN(parseInt(age, 10)) && age < 18) {
-		throw new MutationError({
+		throw new ValidationError({
 			message: 'You must be an adult to register.'
 		});
 	}

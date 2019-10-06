@@ -1,5 +1,5 @@
 import * as ForumModel from '../../model/forum.model';
-import {MutationError} from '../../utils/error';
+import {ValidationError} from '../../utils/error';
 
 export async function getForum(forumId) {
 	return ForumModel.get(forumId);
@@ -17,7 +17,7 @@ export async function createForum(input) {
 		return ForumModel.create(input);
 	}
 
-	throw new MutationError({
+	throw new ValidationError({
 		message: 'Forum input is invalid'
 	});
 }
@@ -29,7 +29,7 @@ export async function deleteForum(userId, forumId) {
 		return {id: forumId};
 	}
 
-	throw new MutationError({
+	throw new ValidationError({
 		message: 'Cannot delete a forum you don\'t manage'
 	});
 }
@@ -68,15 +68,21 @@ export async function seed(forums) {
 
 function isMessageDataValid(message) {
 	if (isNaN(parseInt(message.timestamp, 10))) {
-		throw new TypeError('Invalid Message ID');
+		throw new ValidationError({
+			message: 'Invalid Message ID'
+		});
 	}
 
 	if (isNaN(parseInt(message.author, 10))) {
-		throw new TypeError('Invalid Message author');
+		throw new ValidationError({
+			message: 'Invalid Message author'
+		});
 	}
 
 	if (typeof message.body !== 'string' || message.body === '') {
-		throw new TypeError('Invalid Message body');
+		throw new ValidationError({
+			message: 'Invalid Message body'
+		});
 	}
 
 	return true;
