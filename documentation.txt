@@ -18,14 +18,14 @@ type Query {
 
 type Mutation {
   
-  # Creates a Forum
+  # Creates a Forum (userId emulates the authentication)
   createForum(userId: ID!, input: CreateForumInput!): Forum!
   
-  # Allows a user to join a Forum
+  # Allows a user to join a Forum (userId emulates the authentication)
   joinForum(userId: ID!, forumId: ID!): Forum!
   
-  # Posts a new message to a forum
-  postMessage(forumId: ID!, input: MessageInput!): [Message!]!
+  # Posts a new message to a forum (userId emulates the authentication)
+  postMessage(userId: ID!, forumId: ID!, input: MessageInput!): [Message!]!
   
   # Creates a User
   createUser(input: CreateUserInput!): User!
@@ -65,9 +65,6 @@ type Message {
 }
 
 input MessageInput {
-  
-  # ID of the Message's author
-  author: ID!
   
   # Message body
   body: String!
