@@ -1,0 +1,29 @@
+type Query {
+	# Gets a single Forum
+	getForum(id: ID!): Forum!
+	# Lists all available Forums
+	listForums: [Forum]!
+}
+
+type Mutation {
+	# Creates a Forum (userId emulates the authentication)
+	createForum(userId: ID!, input: CreateForumInput!): Forum!
+	# Allows a user to join a Forum (userId emulates the authentication)
+	joinForum(userId: ID!, forumId: ID!): Forum!
+}
+
+type Forum {
+	# Forum's ID
+	id: ID!
+	# Forum's title
+	title: String!
+	# Forum's list of Messages (ordered by moste recent)
+	messages: [Message]!
+	# Participants that joined in that forum
+	participants: [PublicUser!]!
+}
+
+input CreateForumInput {
+	# Forum's title
+	title: String!
+}

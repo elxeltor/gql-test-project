@@ -1,0 +1,23 @@
+type Query {
+	# Lists all messages of a forum
+	listForumMessages(id: ID!): [Message!]!
+}
+
+type Mutation {
+	# Posts a new message to a forum (userId emulates the authentication)
+	postMessage(userId: ID!, forumId: ID!, input: MessageInput!): [Message!]!
+}
+
+type Message {
+	# Message's timestamp of creation
+	timestamp: String!
+	# Message's author
+	author: PublicUser!
+	# Message's body content
+	body: String!
+}
+
+input MessageInput {
+	# Message body
+	body: String!
+}

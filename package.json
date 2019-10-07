@@ -1,17 +1,69 @@
 {
-  "name": "coding-test",
-  "version": "1.0.0",
-  "description": "coding test in 2 parts",
-  "main": "index.js",
-  "author": "Eliott Mahou <eliott.mahou@polymtl.ca>",
-  "license": "UNLICENSED",
-  "private": true,
-  "scripts": {
-    "start": "node src/app.js"
-  },
-  "dependencies": {
-    "apollo-server": "^2.9.4",
-    "graphql": "^14.5.8",
-    "node-localstorage": "^1.3.1"
-  }
+	"name": "coding-test",
+	"version": "1.0.0",
+	"description": "coding test in 2 parts",
+	"main": "index.js",
+	"author": "Eliott Mahou <eliott.mahou@polymtl.ca>",
+	"license": "UNLICENSED",
+	"private": true,
+	"scripts": {
+		"start": "NODE_ENV=development npm run build && nodemon src/app.js",
+		"build": "npm run clean && babel src -d build && cpx \"src/**/*.graphql\" build",
+		"clean": "rm -rf build",
+		"doc": "babel-node script/doc.js",
+		"test": "NODE_ENV=test jest test"
+	},
+	"dependencies": {
+		"apollo-server": "^2.9.4",
+		"graphql": "^14.5.8",
+		"merge-graphql-schemas": "^1.7.0",
+		"node-localstorage": "^1.3.1"
+	},
+	"devDependencies": {
+		"@babel/cli": "^7.6.2",
+		"@babel/core": "^7.6.2",
+		"@babel/node": "^7.6.2",
+		"@babel/preset-env": "^7.6.2",
+		"babel-plugin-module-resolver": "^3.2.0",
+		"cpx": "^1.5.0",
+		"eslint-plugin-import": "^2.18.2",
+		"jest": "^24.9.0",
+		"nodemon": "^1.19.3",
+		"xo": "^0.25.3"
+	},
+	"babel": {
+		"presets": [
+			[
+				"@babel/preset-env",
+				{
+					"targets": {
+						"node": "current"
+					}
+				}
+			]
+		]
+	},
+	"nodemonConfig": {
+		"ignore": [
+			".git",
+			"node_modules/**/node_modules",
+			"tests/**"
+		],
+		"env": {
+			"NODE_ENV": "development"
+		},
+		"execMap": {
+			"js": "babel-node --inspect -r src/app.js"
+		},
+		"ext": "js, graphql"
+	},
+	"xo": {
+		"env": [
+			"node",
+			"jest"
+		]
+	},
+	"jest": {
+		"testEnvironment": "node"
+	}
 }

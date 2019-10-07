@@ -1,0 +1,38 @@
+type Query {
+	# Information of the current (logged in) User
+	me: User!
+	# Information of the requested User
+	getUser(id: ID!): User!
+}
+
+type Mutation {
+	# Creates a User
+	createUser(input: CreateUserInput!): User!
+}
+
+type User {
+	# User's ID
+	id: ID!
+	# User's name
+	displayName: String!
+	# User's age
+	age: Int!
+	# List of forums the user has joined
+	forums: [Forum]!
+}
+
+type PublicUser {
+	# User's ID
+	id: ID!
+	# User's name
+	displayName: String!
+	# User's age
+	age: Int!
+}
+
+input CreateUserInput {
+	# User's name
+	displayName: String!
+	#User's age (optional)
+	age: Int
+}
