@@ -3,6 +3,8 @@ type Query {
 	getForum(id: ID!): Forum!
 	# Lists all available Forums
 	listForums: [Forum]!
+	# Lists pending join requests to a forum (userId emulates the authentication)
+	listJoinForumRequests(userId: ID!): [JoinForumRequest]!
 }
 
 type Mutation {
@@ -10,6 +12,8 @@ type Mutation {
 	createForum(userId: ID!, input: CreateForumInput!): Forum!
 	# Allows a user to join a Forum (userId emulates the authentication)
 	joinForum(userId: ID!, forumId: ID!): Forum!
+	# Processes join requests and sends a confirmation to the accepted user (if applicable). (userId emulates the authentication)
+	processJoinForumRequest(userId: ID!, forumId: ID! requestsResponses: [ForumRequestResponse!]!): Forum!
 }
 
 type Forum {
@@ -21,9 +25,32 @@ type Forum {
 	messages: [Message]!
 	# Participants that joined in that forum
 	participants: [PublicUser!]!
+	# Forum's privacy
+	privacy: Privacy!
+}
+
+type JoinForumRequest {
+	requesterId: ID!
 }
 
 input CreateForumInput {
 	# Forum's title
 	title: String!
+	# Forum's privacy
+	privacy: Privacy!
+}
+
+input ForumRequestResponse {
+	requesterId: ID!
+	responseStatus: ForumResponseStatus!
+}
+
+enum ForumResponseStatus {
+	accepted
+	rejected
+}
+
+enum Privacy {
+	public
+	private
 }
