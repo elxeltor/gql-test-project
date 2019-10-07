@@ -4,8 +4,8 @@ type Query {
 }
 
 type Mutation {
-	# Posts a new message to a forum
-	postMessage(forumId: ID!, input: MessageInput!): [Message!]!
+	# Posts a new message to a forum (userId emulates the authentication)
+	postMessage(userId: ID!, forumId: ID!, input: MessageInput!): [Message!]!
 }
 
 type Message {
@@ -18,8 +18,6 @@ type Message {
 }
 
 input MessageInput {
-	# ID of the Message's author
-	author: ID!
 	# Message body
 	body: String!
 }

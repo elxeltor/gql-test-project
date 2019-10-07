@@ -11,9 +11,13 @@ async function listForumMessagesResolver(parent, {id}, context) {
 }
 
 // eslint-disable-next-line no-unused-vars
-async function postMessageResolver(parent, {forumId, input}, context) {
-	if (await isForumParticipant(input.author, forumId)) {
-		return addForumMessage(forumId, input)
+async function postMessageResolver(parent, {userId, forumId, input}, context) {
+	const newMessage = {
+		...input,
+		author: userId
+	};
+	if (await isForumParticipant(userId, forumId)) {
+		return addForumMessage(forumId, newMessage)
 			.then(messages => {
 				return messages.reverse();
 			});

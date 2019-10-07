@@ -6,9 +6,9 @@ type Query {
 }
 
 type Mutation {
-	# Creates a Forum
+	# Creates a Forum (userId emulates the authentication)
 	createForum(userId: ID!, input: CreateForumInput!): Forum!
-	# Allows a user to join a Forum
+	# Allows a user to join a Forum (userId emulates the authentication)
 	joinForum(userId: ID!, forumId: ID!): Forum!
 }
 
